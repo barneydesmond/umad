@@ -1,7 +1,8 @@
 UMAD - Unearth Me A Document
 ============================
 
-It's like Google for all your digital shit (information), spread across multiple disjoint systems with no common data format.
+It's like Google for all your disparate information, spread across multiple
+disjoint systems with no common data format.
 
 
 Data flow
@@ -18,4 +19,4 @@ Document blobs
 1. Retrieve a document from a **URL**
 2. Run it through a **distiller** to produce a **document blob**
 3. Put the key (URL) and value (document blob) relation into **storage**
-4. Queries 
+4. Hit it with queries 
