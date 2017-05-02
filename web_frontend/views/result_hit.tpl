@@ -28,10 +28,6 @@
 						% del(other_metadata[doc_type])
 					% end
 					<a href="{{ id.encode('utf8') }}" onClick="evilUserClick({{ json.dumps(hit) }})">{{ linktext.encode('utf8') }}</a> <span class="customer-name">{{ customer_name.encode('utf8') }}</span> <span class="document-score">scored {{ hit['score'] }}</span>
-					<!-- OPTIONAL FOR NOW
-					<span class="lsf social-button-jabber" title="SHARE with #robots" onClick="javascript:shareWithSysadmins('{{ id.encode('utf8').encode('base64').replace('\n','').strip() }}', '{{ linktext.encode('utf8').encode('base64').replace('\n','').strip() }}');">sns</span>
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ id.encode('utf8') }}" data-text="{{ linktext.encode('utf8') }}" data-dnt="true">Tweet that shiz</a>
-					-->
 				</div>
 
 				% if "name" in other_metadata or "title" in other_metadata:
@@ -40,10 +36,12 @@
 
 				<span class="excerpt">{{! hit['extract'].encode('utf8') }}</span><br />
 
+				<!-- WE DON'T HAVE A REINDEXER DAEMON RIGHT NOW, HIDE THE BUTTON
 				<div class="reindex-button">
 					% umad_indexer_query_string = urlencode({'url':id.encode('utf8')})
 					<span class="lsf" title="Reindex this result"><a href="https://umad-indexer.example.com/?{{! umad_indexer_query_string }}" target="_blank" onClick="evilUserReindex({{ json.dumps(hit) }})">sync</a></span>
 				</div>
+				-->
 
 				<div class="metadata-button">
 					<span class="lsf">tag</span>
