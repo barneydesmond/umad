@@ -159,6 +159,7 @@ def search_index(search_term, max_hits=0):
 				# Pre-escape the highlight fragments treating them as HTML content, then slap our highlighting tags on
 				"encoder": "html",
 				"fragment_size": 200,
+				"require_field_match": False,
 				"fields": {
 					"blob": {},
 					"excerpt": {
