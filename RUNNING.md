@@ -58,9 +58,6 @@ way to install the libraries is to use pip to handle dependencies:
 
     pip install -r requirements.txt
 
-The provsys distiller needs the `provisioningclient` library. If this doesn't
-apply to you, remove the applicable lines from `requirements.txt`
-
 An interactive script for running one-shot indexing, `distil_some_stuff.py`, is
 included. Its dependencies, *colorama* and *termcolor*, can also be removed from
 `requirements.txt` if you don't make use of it.

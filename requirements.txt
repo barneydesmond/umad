@@ -1,21 +1,18 @@
 # pip install -r requirements.txt
 
-# These are the requirements for all UMAD components as shipped. Not all of
-# them will be necessary for your installation. provisioningclient in
-# particular is very Anchor-specific, you can ditch that and the provsys
-# distillers.
+# This file has been tweaked against upstream; assuming you're running RHEL,
+# most dependencies are provided by the system. It's a bit of a tradeoff: using
+# the system packages means you could be surprised by routine patching, but
+# there's fewer dependencies to wrangle in the app's virtualenv.
 
-bottle>=0.12
-chardet
-elasticsearch
-lxml
+# Most of these packages come from EPEL, you'll need to enable the repo for
+# your server. python-bottle needs to be version 0.12 or greater, which EPEL6
+# satisfies.
+#
+#     yum install python-bottle python-chardet python-elasticsearch python-lxml python-dateutil python-redis python-requests
 
-python-dateutil
-redis
-requests
 
---extra-index-url http://packages.engineroom.anchor.net.au/pypi/
-provisioningclient
-
+# These are used by the interactive distiller frontend, they can be ignored if
+# you don't use it (but you'll probably use it).
 colorama
 termcolor

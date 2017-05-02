@@ -15,7 +15,6 @@ restart:
 	sudo /usr/local/bin/allah restart umad_gunicorn
 	sudo /usr/local/bin/allah restart umad-indexing-listener_gunicorn
 	sudo /usr/local/bin/allah restart umad-indexing-worker
-	sudo /usr/local/bin/allah restart umad-provsys-auditlog-watcher
 	sudo /usr/local/bin/allah restart umad-analytics-server
 
 

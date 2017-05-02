@@ -19,4 +19,4 @@ Document blobs
 1. Retrieve a document from a **URL**
 2. Run it through a **distiller** to produce a **document blob**
 3. Put the key (URL) and value (document blob) relation into **storage**
-4. Hit it with queries 
+4. Hit it with queries

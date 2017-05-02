@@ -30,14 +30,8 @@ def highlight_document_source(url):
 	# - highlight-red
 	#
 	# We return a 2-element dict containing a pretty_name and css_class
-	if url.startswith('https://map.engineroom.anchor.net.au/'):
-		return ('Map',     'highlight-miku')
-	if url.startswith('https://rt.engineroom.anchor.net.au/'):
-		return ('RT',      'highlight-luka')
-	if url.startswith('https://resources.engineroom.anchor.net.au/'):
-		return ('Provsys', 'highlight-portal-orange')
-	if url.startswith('https://docs.anchor.net.au/'):
-		return ('Gollum',  'highlight-portal-blue')
+	if url.startswith('example://') and url.endswith('your.example.url.here/'):
+		return ('Example label',  'highlight-portal-blue')
 
 	return ('DEFAULT', '')
 
@@ -67,9 +61,9 @@ def serve_opensearch_definition():
 	search_root = '{0}://{1}/'.format(request['wsgi.url_scheme'], request['HTTP_HOST'])
 	opensearch_description = template(opensearch_template,
 		shortname='UMAD? ({0})'.format(request['SERVER_NAME']),
-		description='Ask about Anchor and ye shall receive.',
-		tags='anchor provsys rt tickets map wiki moin gollum docs',
-		contact='barney.desmond@anchor.net.au',
+		description='Ask (or just get frustrated) and ye shall receive.',
+		tags='wiki docs indexing doe det dec itd',
+		contact='barneydesmond@gmail.com',
 		search_root=search_root)
 
 	response.content_type = 'application/opensearchdescription+xml'
@@ -113,10 +107,6 @@ def search():
 		results = search_index(search_term, max_hits=count)
 		result_docs = results['hits']
 		template_dict['hit_limit'] = results['hit_limit']
-
-		# Clean out cruft, because our index is dirty right now
-		result_docs = [ x for x in result_docs if not x['id'].startswith('https://ticket.api.anchor.com.au/') ]
-		result_docs = [ x for x in result_docs if not x['id'].startswith('provsys://') ]
 
 		# Sort all results before presentation
 		result_docs.sort(key=itemgetter('score'), reverse=True)
@@ -208,4 +198,3 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	sys.exit(main())
-

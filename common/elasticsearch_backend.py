@@ -51,7 +51,7 @@ def add_to_index(key, document):
 
 # Useful for cleaning up mistakes when docs get indexed incorrectly, eg.:
 # >>> import elasticsearch_backend
-# >>> elasticsearch_backend.delete_from_index('https://docs.anchor.net.au/some/obsolete/page')
+# >>> elasticsearch_backend.delete_from_index('example://some-system-hostname-here/path/to/document')
 def delete_from_index(url):
 	doc_type = determine_doc_type(url)
 	index_name = "umad_%s" % doc_type
@@ -60,17 +60,6 @@ def delete_from_index(url):
 	try:
 		es.delete(
 			index = index_name,
-			doc_type = doc_type,
-			id = url
-		)
-	except elasticsearch.exceptions.NotFoundError as e:
-		pass
-
-	# XXX: nuke this one day
-	# Get rid of it from the legacy index as well
-	try:
-		es.delete(
-			index = "umad",
 			doc_type = doc_type,
 			id = url
 		)
@@ -151,8 +140,6 @@ def search_index(search_term, max_hits=0):
 						type_boost('provsys', 3.0),
 						type_boost('gollum',  2.0),
 						type_boost('map',     1.8),
-						# Funnel pages are low-value
-						{ "boost_factor": 0.5, "filter": { "query": { "query_string": { "query": "url:(Funnel AND Sales)" } } } },
 						# CSR Procedures are especially useful
 						{ "boost_factor": 2.5, "filter": { "query": { "query_string": { "query": "url:\"CustomerService/Procedures\"" } } } },
 					],
@@ -181,13 +168,6 @@ def search_index(search_term, max_hits=0):
 				}
 			}
 		}
-
-		if backend == 'rt':
-			# We *should* be able to mix this in with a filter so that it only applies to rt documents,
-			# but that doesn't seem to work and all the non-rt shards complain.
-			q_dict['query']['function_score']['functions'].append(linear_deweight_for_age())
-			# Searching for RT ticket numbers is highly appropriate.
-			q_dict['query']['function_score']['query']['query_string']['fields'].append("local_id^3")
 
 		idx_name = "umad_{0}".format
 		if max_hits:

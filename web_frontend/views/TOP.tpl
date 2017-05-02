@@ -46,7 +46,7 @@
 			var message = "Some sysadmin Liked this UMAD result\n(¬‿¬) " + $.base64.decode(description) + " - " + $.base64.decode(url);
 
 			// http://api.jquery.com/jQuery.post/
-			$.post("http://hubot.anchor.net.au:8080/message/room/" + roomname + "@conference.jabber.engineroom.anchor.net.au", "data="+encodeURIComponent(message) );
+			$.post("http://chatbot.example.com/message/room/" + roomname + "@yourdomain.com", "data="+encodeURIComponent(message) );
 			alert("Done!\n\n(in future this'll be done as a nice in-page notification instead of a modal popup)");
 		}
 

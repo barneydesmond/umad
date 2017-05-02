@@ -1,9 +1,10 @@
 				% # Convert CSS highlighting classes to a semantic description of the document type (always plural)
+				% # XXX: what is this actually for again..?
 				% highlight_classes_to_doctypes = {}
-				% highlight_classes_to_doctypes['highlight-portal-orange'] = "provsys servers"
-				% highlight_classes_to_doctypes['highlight-portal-blue'] = "gollum docs"
-				% highlight_classes_to_doctypes['highlight-luka'] = "RT tickets"
-				% highlight_classes_to_doctypes['highlight-miku'] = "Map wiki pages"
+				% highlight_classes_to_doctypes['highlight-portal-orange'] = "YoRHa Type 2B androids"
+				% highlight_classes_to_doctypes['highlight-portal-blue'] = "YoRHa Type 9S androids"
+				% highlight_classes_to_doctypes['highlight-luka'] = "YoRHa Type A2 androids"
+				% highlight_classes_to_doctypes['highlight-miku'] = "YoRHa operators"
 				% highlight_classes_to_doctypes[''] = "documents of unknown origin"
 				%
 				% # Use json for encoding strings
@@ -38,7 +39,7 @@
 
 				<div class="reindex-button">
 					% umad_indexer_query_string = urlencode({'url':id.encode('utf8')})
-					<span class="lsf" title="Reindex this result"><a href="https://umad-indexer.anchor.net.au/?{{! umad_indexer_query_string }}" target="_blank" onClick="evilUserReindex({{ json.dumps(hit) }})">sync</a></span>
+					<span class="lsf" title="Reindex this result"><a href="https://umad-indexer.example.com/?{{! umad_indexer_query_string }}" target="_blank" onClick="evilUserReindex({{ json.dumps(hit) }})">sync</a></span>
 				</div>
 
 				<div class="metadata-button">

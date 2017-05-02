@@ -1,21 +1,12 @@
 # Make sure to add your new doc_types to this list as well as to
 # `determine_doc_type` below.
-KNOWN_DOC_TYPES = [ 'provsys', 'docs', 'map', 'rt' ]
+KNOWN_DOC_TYPES = [ 'local' ]
 
 
 # Define this function yourself, remember to add doc_types to the list above.
 def determine_doc_type(url):
-	if url.startswith('https://map.engineroom.anchor.net.au/'):
-		return "map"
-
-	if url.startswith('https://rt.engineroom.anchor.net.au/'):
-		return "rt"
-
-	if url.startswith('https://resources.engineroom.anchor.net.au/'):
-		return "provsys"
-
-	if url.startswith('https://docs.anchor.net.au/'):
-		return "docs"
+	if url.startswith('local:///'):
+		return 'local'
 
 	# This must return UNTYPED if everything else fails
 	# XXX: actually, index names must apparently be lowercase, so this is invalid
@@ -23,7 +14,7 @@ def determine_doc_type(url):
 
 
 # A list of hostnames/IPs and ports, passed straight to the ES constructor.
-ELASTICSEARCH_NODES = [ "umad.anchor.net.au:9200" ]
+ELASTICSEARCH_NODES = [ "127.0.0.1:9200" ]
 
 
 # Not using "_all" because you might have other indices in the ES cluster, or have polluted your indices
