@@ -11,8 +11,11 @@
 				% import json
 				% # For creating links to the umad-indexer
 				% from urllib import urlencode
+				% # We'll use this a lot
+				% other_metadata = hit['other_metadata']
+				% id = hit['id']
 
-				<li class="result-card {{ highlight_class.encode('utf8') }}">
+				<li class="result-card {{ hit['highlight_class'].encode('utf8') }}">
 				<div class="hitlink">
 					% linktext = other_metadata.get('name', id)
 					% linktext = other_metadata.get('title', linktext)
@@ -24,7 +27,7 @@
 					% if doc_type:
 						% del(other_metadata[doc_type])
 					% end
-					<a href="{{ id.encode('utf8') }}" onClick="evilUserClick({{ json.dumps(hit) }})">{{ linktext.encode('utf8') }}</a> <span class="customer-name">{{ customer_name.encode('utf8') }}</span> <span class="document-score">scored {{ score }}</span>
+					<a href="{{ id.encode('utf8') }}" onClick="evilUserClick({{ json.dumps(hit) }})">{{ linktext.encode('utf8') }}</a> <span class="customer-name">{{ customer_name.encode('utf8') }}</span> <span class="document-score">scored {{ hit['score'] }}</span>
 					<!-- OPTIONAL FOR NOW
 					<span class="lsf social-button-jabber" title="SHARE with #robots" onClick="javascript:shareWithSysadmins('{{ id.encode('utf8').encode('base64').replace('\n','').strip() }}', '{{ linktext.encode('utf8').encode('base64').replace('\n','').strip() }}');">sns</span>
 					<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ id.encode('utf8') }}" data-text="{{ linktext.encode('utf8') }}" data-dnt="true">Tweet that shiz</a>
@@ -35,7 +38,7 @@
 				<div class="hiturl">{{ id.encode('utf8') }}</div>
 				% end
 
-				<span class="excerpt">{{! extract.encode('utf8') }}</span><br />
+				<span class="excerpt">{{! hit['extract'].encode('utf8') }}</span><br />
 
 				<div class="reindex-button">
 					% umad_indexer_query_string = urlencode({'url':id.encode('utf8')})
