@@ -136,18 +136,16 @@ def search_index(search_term, max_hits=0):
 					"functions": [
 						# This is a dummy boost, as ES complains if there are no functions to run.
 						{ "boost_factor": 1.0 },
-						# Goal: Provsys ranks highest, then new gollum docs, then old Map wiki, then RT tickets.
-						type_boost('provsys', 3.0),
-						type_boost('gollum',  2.0),
-						type_boost('map',     1.8),
-						# CSR Procedures are especially useful
-						{ "boost_factor": 2.5, "filter": { "query": { "query_string": { "query": "url:\"CustomerService/Procedures\"" } } } },
+						# Goal: ExampleA ranks highest, then ExampleB docs, then ExampleC.
+						type_boost('examplea', 3.0),
+						type_boost('exampleb', 2.0),
+						type_boost('examplec', 1.8),
 					],
 					"query": {
 						"query_string": {
 							"query": search_term,
 							"default_operator": "and",
-							"fields": [ "title^1.5", "customer_name", "blob" ]
+							"fields": [ "title^1.5", "blob" ]
 						}
 					},
 					"score_mode": "multiply"
