@@ -75,7 +75,7 @@ def valid_search_query(search_term):
 	return test_results[u'valid']
 
 def type_boost(doctype, boost_factor):
-	return { "boost_factor": boost_factor, "filter": { "type": { "value": doctype } } }
+	return { "weight": boost_factor, "filter": { "type": { "value": doctype } } }
 
 def linear_deweight_for_age(scale='28d'):
 	# We can mix this in for RT tickets and any documents with a "last_updated" field.
@@ -135,11 +135,10 @@ def search_index(search_term, max_hits=0):
 				"function_score": {
 					"functions": [
 						# This is a dummy boost, as ES complains if there are no functions to run.
-						{ "boost_factor": 1.0 },
-						# Goal: ExampleA ranks highest, then ExampleB docs, then ExampleC.
+						{ "weight": 1.0 },
+						# Goal: ExampleA ranks highest, then ExampleB docs, then other things.
 						type_boost('examplea', 3.0),
 						type_boost('exampleb', 2.0),
-						type_boost('examplec', 1.8),
 					],
 					"query": {
 						"query_string": {
@@ -187,4 +186,4 @@ def get_from_index(url):
 	index_name = "umad_%s" % doc_type
 
 	args = [index_name, url]
-	return es.get(index=index_name, id=url)
+	return es.get(index=index_name, id=url, doc_type=doc_type)
