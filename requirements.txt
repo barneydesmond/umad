@@ -16,3 +16,17 @@
 # you don't use it (but you'll probably use it).
 colorama
 termcolor
+
+# Needed for sane datetime handling (stat'ing files for mtime)
+pytz
+tzlocal
+
+# distilling
+requests
+python-ldap
+python-dateutil
+elasticsearch
+
+# web interface
+bottle
+pyScss
