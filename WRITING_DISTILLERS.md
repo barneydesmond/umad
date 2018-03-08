@@ -50,6 +50,8 @@ You may return additional keys in your blob, indeed this is encouraged. Addition
 
 * If `title` is present, it will be used when the document is displayed,
   instead of the raw `url`
+* If `excerpt` is present, it will be used when the document is displayed,
+  instead of the raw `blob`. It should be a pleasant human-readable text.
 * `local_id` can be provided as a domain-specific identifier for a document.
   This should be a high-value hit if the user searches for it.
     * For example, support ticket numbers are a unique identifier for support
