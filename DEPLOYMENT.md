@@ -49,7 +49,7 @@ This part is a bit more fiddly.
 2. Create some directories
     ```bash
     su - srv_umad
-    
+
     mkdir ~/git
     mkdir ~/virtualenvs
     ```
@@ -57,7 +57,7 @@ This part is a bit more fiddly.
 3. Clone the code
     ```bash
     cd ~/git/
-    git clone ssh://git@bitbucket.det.nsw.edu.au:7999/lnx/umad.git
+    git clone ssh://git@bitbucket:7999/lnx/umad.git
     ```
 
 4. Go in and tweak `localconfig.py` for your local deployment. You'll want to ensure your ES nodes are correct, and you'll need to fiddle with the doctypes for your planned deployment.
@@ -107,7 +107,7 @@ Using http://localhost:8080/ is well and good, you get a static webpage. Search 
 
     ```python
     KNOWN_DOC_TYPES = [ 'ldap_netgroup', 'local' ]
-    
+
     def determine_doc_type(url):
         if url.startswith('ldap://') and url.endswith(',ou=Netgroup,o=unixteam'):
             return 'ldap_netgroup'
